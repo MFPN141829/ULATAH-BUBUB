@@ -92,15 +92,22 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    #countdown {
+      font-size: 4vw;
+      margin: 10px auto;
+    }
+
     @media (min-width: 600px) {
       h1 { font-size: 3em; }
-      #running-text { font-size: 1.5em; }
+      #running-text, #countdown { font-size: 1.5em; }
     }
   </style>
 </head>
 <body>
 
   <h1>Selamat Ulang Tahun!</h1>
+  <div id="countdown">Menghitung waktu...</div>
+
   <img src="assets/foto.jpg" alt="Foto"><br>
   <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
 
@@ -140,6 +147,7 @@
 
   <script>
     const audio = document.getElementById('bgm');
+
     function toggleAudio() {
       if (audio.paused) {
         audio.play();
@@ -150,6 +158,7 @@
 
     function showUcapan() {
       document.querySelector('h1').style.display = 'none';
+      document.querySelector('#countdown').style.display = 'none';
       document.querySelector('#running-text').style.display = 'none';
       document.querySelector('img[alt="Foto"]').style.display = 'none';
       document.querySelector('button[onclick="toggleAudio()"]').style.display = 'none';
@@ -161,6 +170,28 @@
       document.getElementById('ucapan').style.display = 'none';
       document.getElementById('galeri').style.display = 'block';
     }
+
+    // Countdown
+    const countdownEl = document.getElementById('countdown');
+    const targetDate = new Date("2025-07-18T00:00:00").getTime();
+
+    const countdown = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        clearInterval(countdown);
+        countdownEl.innerHTML = "Selamat Ulang Tahun!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+    }, 1000);
 
     window.addEventListener('scroll', function () {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
