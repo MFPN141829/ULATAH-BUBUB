@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Ulang Tahun!</title>
+  <style>
+    body {
+      background-color: #fce4ec;
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive;
+      color: #880e4f;
+      margin: 0;
+    }
+    h1 {
+      animation: slidein 3s infinite alternate;
+      font-size: 2.5em;
+    }
+    @keyframes slidein {
+      from { transform: translateX(-100%); }
+      to   { transform: translateX(100%); }
+    }
+    img {
+      margin-top: 20px;
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #333;
+    }
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selamat Ulang Tahun!</h1>
+  <img src="assets/foto.jpg" alt="Foto Ucapan">
+  <br>
+  <audio controls autoplay loop>
+    <source src="assets/lagu.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+</body>
+</html>
