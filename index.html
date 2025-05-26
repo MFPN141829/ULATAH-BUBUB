@@ -1,51 +1,45 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selamat Ulang Tahun!</title>
+  <title>Selamat Ulang Tahun</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-image: url('assets/bg.JPG');
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'Arial', sans-serif;
+      overflow-x: hidden;
+    }
+    .page {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background-size: cover;
       background-position: center;
+      padding: 20px;
+      text-align: center;
+    }
+    #page1 {
+      background-image: url('assets/bg1.JPG');
       color: white;
     }
-
-    h1 {
-      font-size: 6vw;
-      margin-top: 30px;
-      animation: blink 1.5s infinite;
+    #countdown {
+      font-size: 1.5em;
+      margin: 10px 0;
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+    marquee {
+      font-size: 1.2em;
+      margin: 20px 0;
+      background: rgba(255, 192, 203, 0.5);
+      padding: 10px;
+      border-radius: 10px;
     }
-
-    #running-text {
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: .15em solid pink;
-      width: 0;
-      animation: typing 7s steps(50, end) forwards;
-      font-size: 4vw;
-      margin: 20px auto;
-      max-width: 90%;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
     button {
       padding: 10px 20px;
-      margin: 20px 10px;
+      margin-top: 20px;
       font-size: 1em;
       background-color: #e91e63;
       color: white;
@@ -53,155 +47,111 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
-    img {
-      max-width: 90%;
-      height: auto;
-    }
-
-    #ucapan, #galeri {
+    #page2 {
+      background-image: url('assets/bg2.jpg');
       display: none;
-      padding: 20px;
+      color: white;
     }
-
-    #gif-container {
+    #page3 {
+      background-image: url('assets/bg3.jpg');
       display: none;
-      margin-top: 20px;
+      color: white;
     }
-
-    .fade-in {
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+    #typed-text {
+      font-size: 1.1em;
+      white-space: pre-wrap;
+      margin-bottom: 20px;
     }
-
-    .fade-in.show {
-      opacity: 1;
+    .gif {
+      max-width: 150px;
+      margin: 10px;
+      display: none;
     }
-
-    .foto-scroll {
-      min-width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      scroll-snap-align: start;
-    }
-
-    #foto-wrapper {
+    .gallery {
       display: flex;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      padding: 20px;
+      width: 100%;
     }
-
-    #countdown {
-      font-size: 4vw;
-      margin: 10px auto;
+    .gallery img {
+      width: 80vw;
+      max-width: 300px;
+      border-radius: 10px;
+      transition: transform 0.5s;
     }
-
-    @media (min-width: 600px) {
-      h1 { font-size: 3em; }
-      #running-text, #countdown { font-size: 1.5em; }
+    .gallery img:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-
-  <h1>Selamat Ulang Tahun!</h1>
-  <div id="countdown">Menghitung waktu...</div>
-
-  <img src="assets/foto.jpg" alt="Foto"><br>
-  <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
-
-  <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
-  <button onclick="showUcapan()">Lanjut</button>
-
-  <audio id="bgm" autoplay loop>
+  <div id="page1" class="page">
+    <h1>Selamat Ulang Tahun!</h1>
+    <div id="countdown"></div>
+    <marquee behavior="scroll" direction="left">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai. Aku sayang kamu!</marquee>
+    <button onclick="showPage('page2')">Lanjut</button>
+    <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
+  </div>  <div id="page2" class="page">
+    <div id="typed-text"></div>
+    <img src="assets/hati.gif" class="gif" id="gif1">
+    <img src="assets/peluk.gif" class="gif" id="gif2">
+    <button onclick="showPage('page3')">Lanjut ke Galeri</button>
+  </div>  <div id="page3" class="page">
+    <h2>Galeri Foto</h2>
+    <div class="gallery">
+      <img src="assets/foto1.jpg">
+      <img src="assets/foto2.jpg">
+      <img src="assets/foto3.jpg">
+      <img src="assets/foto4.jpg">
+      <img src="assets/foto5.jpg">
+    </div>
+  </div>  <audio id="bgm" autoplay loop>
     <source src="assets/lagu.mp3" type="audio/mpeg">
-  </audio>
-
-  <div id="ucapan">
-    <h2 style="font-size: 5vw;">Ucapan Spesial</h2>
-    <p style="max-width: 90%; margin: auto; font-size: 4vw;">
-      HAPPY BIRTHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU💗💗💖💖💝💝💝<br><br>
-      Selamat atas bertambah umurnya ssyanggg💖💖 semoga menjadi pribadi lebih baik, anak sholehah, sehat selalu, rezekinya lancar, dan semua harapanmu tercapai yaa ssyangg💗💖💖💖<br><br>
-      Maaf yaa kalo kado atau perayaannya kurang dari ekspektasimu. Tapi dari aku doa yang terbaik buat kamu, sayangku tersayang! Aku sayang banget sama kamu, walau suka berantem tapi aku nyesel setiap habis itu. Maaf yaa bila kasar. ILOVEYOUMORE CINTAAA CANTIKK GEMSEEE BIDADRIKUUU💖💗💗💗💗💗💗💗
-    </p>
-
-    <div id="gif-container" class="fade-in">
-      <img src="assets/hati.gif" alt="Hati" width="100">
-      <img src="assets/peluk.gif" alt="Peluk" width="100">
-    </div>
-
-    <button onclick="showGaleri()">Lanjut ke Galeri</button>
-  </div>
-
-  <div id="galeri">
-    <h2 style="font-size: 5vw;">Kenangan Kita</h2>
-    <div id="foto-wrapper">
-      <img src="assets/foto1.jpg" alt="Foto 1" class="foto-scroll">
-      <img src="assets/foto2.jpg" alt="Foto 2" class="foto-scroll">
-      <img src="assets/foto3.jpg" alt="Foto 3" class="foto-scroll">
-      <img src="assets/foto4.jpg" alt="Foto 4" class="foto-scroll">
-      <img src="assets/foto5.jpg" alt="Foto 5" class="foto-scroll">
-    </div>
-  </div>
-
-  <script>
-    const audio = document.getElementById('bgm');
-
-    function toggleAudio() {
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-
-    function showUcapan() {
-      document.querySelector('h1').style.display = 'none';
-      document.querySelector('#countdown').style.display = 'none';
-      document.querySelector('#running-text').style.display = 'none';
-      document.querySelector('img[alt="Foto"]').style.display = 'none';
-      document.querySelector('button[onclick="toggleAudio()"]').style.display = 'none';
-      document.querySelector('button[onclick="showUcapan()"]').style.display = 'none';
-      document.getElementById('ucapan').style.display = 'block';
-    }
-
-    function showGaleri() {
-      document.getElementById('ucapan').style.display = 'none';
-      document.getElementById('galeri').style.display = 'block';
-    }
-
-    // Countdown
-    const countdownEl = document.getElementById('countdown');
-    const targetDate = new Date("2025-07-18T00:00:00").getTime();
-
-    const countdown = setInterval(function () {
+  </audio>  <script>
+    const targetDate = new Date("July 18, 2025 00:00:00").getTime();
+    const countdown = document.getElementById("countdown");
+    setInterval(() => {
       const now = new Date().getTime();
       const distance = targetDate - now;
-
-      if (distance <= 0) {
-        clearInterval(countdown);
-        countdownEl.innerHTML = "Selamat Ulang Tahun!";
-        return;
-      }
-
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownEl.innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+      countdown.innerHTML = `Countdown: ${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
     }, 1000);
 
-    window.addEventListener('scroll', function () {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
-        const gif = document.getElementById('gif-container');
-        gif.style.display = 'block';
-        setTimeout(() => {
-          gif.classList.add('show');
-        }, 100);
-      }
-    });
-  </script>
-</body>
+    function toggleAudio() {
+      const audio = document.getElementById('bgm');
+      if (audio.paused) audio.play(); else audio.pause();
+    }
+
+    function showPage(id) {
+      document.getElementById('page1').style.display = 'none';
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page3').style.display = 'none';
+      document.getElementById(id).style.display = 'flex';
+      if (id === 'page2') startTyping();
+    }
+
+    const message = `HAPPY BRITHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU Selamat atas bertambah umurnya ssyang semoga semakin bertambah umurnya menjadi probadi yang lebih baik lagi yaa ssyang dan juga menjadi anak yang sholehah kepada orangtuanya, semoga selalu di berikan kesehatan dan rezekinya di perlancar lagi ssyanggg amiin, dan semoga apa yang kamu harapkan selalu tercapai yaa ssyangg maap yaa sayangg kalo kado dari aku kurang bagus atau kurang dari ekspetasi kamu, maap juga bila perayaan nya kurang se bagus kamu di saat kamu meraykan ulang tahun aku, pokonya dari aku do'a yang terbaik untuk bubub yaa sayanggg  aku sayang banget sama kamu walaupun ya kadang suka berantem juga tapi suka menyesal sih kalo udah berantem nya maap yaa bila aku selalu kasar ke kamu mohon untuk di maapkan sayangg iloveyoumore sayangg cintaaa cantikkk gemseee bidadrikuuuu`;
+    let i = 0;
+    function startTyping() {
+      const el = document.getElementById("typed-text");
+      const gif1 = document.getElementById("gif1");
+      const gif2 = document.getElementById("gif2");
+      el.innerHTML = "";
+      const interval = setInterval(() => {
+        el.innerHTML += message.charAt(i);
+        i++;
+        if (i >= message.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            gif1.style.display = "block";
+            gif2.style.display = "block";
+          }, 500);
+        }
+      }, 40);
+    }
+  </script></body>
 </html>
