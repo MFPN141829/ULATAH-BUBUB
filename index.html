@@ -1,106 +1,136 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Selamat Ulang Tahun!</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('assets/bg.JPG') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
       text-align: center;
-      text-shadow: 1px 1px 4px #000;
+      font-family: Arial, sans-serif;
+      background-image: url('assets/bg.JPG');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      margin: 0;
+      padding: 0;
     }
-
-    .screen {
-      display: none;
-      padding: 20px;
-    }
-
-    .active {
-      display: block;
-    }
-
     h1 {
-      font-size: 6vw;
+      font-size: 2.5em;
       margin-top: 20px;
       animation: blink 1.5s infinite;
     }
-
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
-
-    #countdown {
-      font-size: 5vw;
-      margin: 20px 0;
-      font-weight: bold;
+    #running-text {
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid pink;
+      width: 0;
+      animation: typing 10s steps(50, end) forwards;
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 90%;
     }
-
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
     button {
       padding: 10px 20px;
-      font-size: 4vw;
-      margin-top: 20px;
+      margin: 20px;
+      font-size: 1em;
       background-color: #e91e63;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
     }
-
-    #kue {
-      width: 60%;
-      max-width: 250px;
+    #ucapan {
+      display: none;
+      padding: 20px;
+    }
+    #gif-container {
+      display: none;
       margin-top: 20px;
     }
-
-    #pesan {
-      font-size: 4vw;
-      margin-top: 20px;
-      white-space: pre-wrap;
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .fade-in.show {
+      opacity: 1;
+    }
+    #galeri {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    .foto {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+      display: inline-block;
+    }
+    .foto.muncul {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
 
-  <!-- Halaman Awal -->
-  <div id="awal" class="screen active">
-    <h1>Selamat Ulang Tahun!</h1>
-    <div id="countdown"></div>
-    <img src="assets/foto.jpg" alt="Foto" width="300">
-    <p>Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
-    <button onclick="nextPage()">Lanjut</button>
-    <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
-  </div>
+  <h1>Selamat Ulang Tahun!</h1>
+  <img src="assets/foto.jpg" alt="Foto" width="300"><br>
+  <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
 
-  <!-- Halaman Ucapan -->
-  <div id="ucapan" class="screen">
-    <img id="kue" src="assets/kue.gif" alt="Kue Ulang Tahun">
-    <div id="pesan">
-      HAPPY BRITHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU💗💗💖💖💝💝💝
-      Selamat atas bertambah umurnya ssyanggg💖💖 semoga semakin bertambah umurnya menjadi probadi yang lebih baik lagi yaa ssyang dan juga menjadi anak yang sholehah kepada orangtuanya, semoga selalu di berikan kesehatan dan rezekinya di perlancar lagi ssyanggg amiin,
-      dan semoga apa yang kamu harapkan selalu tercapai yaa ssyangg💗💖💖💖
-
-      Maap yaa sayangg kalo kado dari aku kurang bagus atau kurang dari ekspetasi kamu, maap juga bila perayaan nya kurang se bagus kamu di saat kamu meraykan ulang tahun aku🙏🙏🙏🙏🙏
-      
-      Pokonya dari aku do'a yang terbaik untuk bubub yaa sayanggg.
-      Aku sayang banget sama kamu walaupun ya kadang suka berantem juga tapi suka nyesal sih kalo udah berantem nya, maap yaa bila aku selalu kasar ke kamu mohon untuk di maafkan sayangg
-
-      ILOVEYOUMORE SAYANGG CINTAAA CANTIKKK GEMSEEE BIDADRIKUUUU💖💗💗💗💗💗💗💗
-    </div>
-  </div>
+  <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
+  <button onclick="showUcapan()">Lanjut</button>
 
   <audio id="bgm" autoplay loop>
     <source src="assets/lagu.mp3" type="audio/mpeg">
   </audio>
 
+  <div id="ucapan">
+    <h2>Ucapan Spesial</h2>
+    <p style="max-width: 90%; margin: auto;">
+      HAPPY BRITHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU  
+      Selamat atas bertambah umurnya ssyanggg  
+      semoga semakin bertambah umurnya menjadi probadi yang lebih baik lagi yaa ssyang  
+      dan juga menjadi anak yang sholehah kepada orangtuanya, semoga selalu di berikan kesehatan  
+      dan rezekinya di perlancar lagi ssyanggg amiin, dan semoga apa yang kamu harapkan selalu  
+      tercapai yaa ssyangg  
+      maap yaa sayangg kalo kado dari aku kurang bagus atau kurang dari ekspetasi kamu,  
+      maap juga bila perayaan nya kurang se bagus kamu di saat kamu meraykan ulang tahun aku  
+      pokonya dari aku do'a yang terbaik untuk bubub yaa sayanggg  
+      aku sayang bnaget sama kamu walaupun ya kadang suka beratem juga tapi suka nyesal  
+      sih kalo udah berantem nya maap yaa bila aku selalu kasar ke kamu  
+      mohon untuk di maapkan sayangg  
+      iloveyoumore sayangg cintaaa cantikkk gemseee bidadrikuuuu
+    </p>
+
+    <div id="gif-container" class="fade-in">
+      <img src="assets/hati.gif" alt="Hati" width="120" style="margin: 10px;">
+      <img src="assets/peluk.gif" alt="Peluk" width="120" style="margin: 10px;">
+    </div>
+
+    <button onclick="showGaleri()">Lanjut ke Galeri</button>
+  </div>
+
+  <div id="galeri">
+    <h2>Kenangan Kita</h2>
+    <div style="overflow-x: auto; white-space: nowrap; padding: 10px;">
+      <img src="assets/foto1.jpg" alt="Foto 1" class="foto" style="width: 200px; margin-right: 10px;">
+      <img src="assets/foto2.jpg" alt="Foto 2" class="foto" style="width: 200px; margin-right: 10px;">
+      <img src="assets/foto3.jpg" alt="Foto 3" class="foto" style="width: 200px; margin-right: 10px;">
+      <img src="assets/foto4.jpg" alt="Foto 4" class="foto" style="width: 200px; margin-right: 10px;">
+      <img src="assets/foto5.jpg" alt="Foto 5" class="foto" style="width: 200px;">
+    </div>
+  </div>
+
   <script>
     const audio = document.getElementById('bgm');
-
     function toggleAudio() {
       if (audio.paused) {
         audio.play();
@@ -109,32 +139,49 @@
       }
     }
 
-    function nextPage() {
-      document.getElementById('awal').classList.remove('active');
-      document.getElementById('ucapan').classList.add('active');
+    function showUcapan() {
+      document.querySelector('h1').style.display = 'none';
+      document.querySelector('#running-text').style.display = 'none';
+      document.querySelector('img[alt="Foto"]').style.display = 'none';
+      document.querySelector('button[onclick="toggleAudio()"]').style.display = 'none';
+      document.querySelector('button[onclick="showUcapan()"]').style.display = 'none';
+      document.getElementById('ucapan').style.display = 'block';
     }
 
-    function updateCountdown() {
-      const targetDate = new Date("July 18, 2025 00:00:00").getTime();
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+    function showGaleri() {
+      document.getElementById('ucapan').style.display = 'none';
+      document.getElementById('galeri').style.display = 'block';
+      animasiFoto();
+    }
 
-      if (distance < 0) {
-        document.getElementById('countdown').innerHTML = "Hari ini ulang tahun bubub!";
-        return;
+    // Munculkan gif setelah scroll habis
+    window.addEventListener('scroll', function () {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+        const gif = document.getElementById('gif-container');
+        gif.style.display = 'block';
+        setTimeout(() => {
+          gif.classList.add('show');
+        }, 100);
       }
+    });
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('countdown').innerHTML =
-        `Menuju ultah bubub: ${days}h ${hours}j ${minutes}m ${seconds}d`;
+    // Galeri animasi
+    function isInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.left < window.innerWidth && rect.right > 0;
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    function animasiFoto() {
+      const fotoList = document.querySelectorAll('.foto');
+      fotoList.forEach(foto => {
+        if (isInViewport(foto)) {
+          foto.classList.add('muncul');
+        }
+      });
+    }
+
+    const galeriScroll = document.querySelector('#galeri div[style*="overflow-x"]');
+    galeriScroll.addEventListener('scroll', animasiFoto);
   </script>
 
 </body>
