@@ -1,58 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selamat Ulang Tahun!</title>
   <style>
     body {
       text-align: center;
-      background: url('assets/bg.JPG') no-repeat center center fixed;
+      background: url('assets/bg.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: Arial, sans-serif;
       color: white;
       text-shadow: 1px 1px 4px #000;
+      padding: 20px;
     }
+
     h1 {
-      font-size: 1.8em;
-      margin-top: 20px;
+      font-size: 6vw;
+      margin-top: 10px;
       animation: blink 1.5s infinite;
     }
+
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    #countdown {
+      font-size: 5vw;
+      margin: 20px 0;
+      font-weight: bold;
+    }
+
     #running-text {
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid pink;
       width: 0;
-      animation: typing 10s steps(50, end) forwards;
-      font-size: 1.2em;
-      margin-top: 30px;
+      animation: typing 5s steps(80, end) forwards;
+      font-size: 4vw;
+      margin-top: 20px;
+      min-height: 2em;
     }
+
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
     }
+
     button {
       padding: 10px 20px;
       margin-top: 20px;
-      font-size: 1em;
+      font-size: 4vw;
       background-color: #e91e63;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
     }
+
+    img {
+      width: 70%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #kue {
+      display: none;
+      margin-top: 20px;
+      width: 150px;
+    }
   </style>
 </head>
 <body>
   <h1>Selamat Ulang Tahun!</h1>
-  <img src="assets/foto.jpg" alt="Foto" width="300"><br>
+
+  <div id="countdown"></div>
+
+  <img src="assets/foto.jpg" alt="Foto Ulang Tahun"><br>
 
   <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
 
   <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
+  <button onclick="showSpecial()">Lanjut</button>
+
+  <img id="kue" src="assets/kue.gif" alt="Kue Ulang Tahun">
 
   <audio id="bgm" autoplay loop>
     <source src="assets/lagu.mp3" type="audio/mpeg">
@@ -60,6 +93,10 @@
 
   <script>
     const audio = document.getElementById('bgm');
+    const countdownEl = document.getElementById('countdown');
+    const runningText = document.getElementById('running-text');
+    const kue = document.getElementById('kue');
+
     function toggleAudio() {
       if (audio.paused) {
         audio.play();
@@ -67,6 +104,36 @@
         audio.pause();
       }
     }
+
+    function showSpecial() {
+      const pesan = `HAPPY BRITHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU💗💗💖💖💝💝💝 Selamat atas bertambah umurnya ssyanggg💖💖 semoga semakin bertambah umurnya menjadi probadi yang lebih baik lagi yaa ssyang dan juga menjadi anak yang sholehah kepada orangtuanya, semoga selalu di berikan kesehatan dan rezekinya di perlancar lagi ssyanggg amiin, dan semoga apa yang kamu harapkan selalu tercapai yaa ssyangg💗💖💖💖 maap yaa sayangg kalo kado dari aku kurang bagus atau kurang dari ekspetasi kamu, maap juga bila perayaan nya kurang se bagus kamu di saat kamu meraykan ulang tahun aku🙏🙏🙏🙏🙏,  pokonya dari aku do'a yang terbaik untuk bubub yaa sayanggg  aku sayang bnaget sama kamu walaupun ya kadang suka beratem juga tapi suka menysal sih kalo udah berantem nya maap yaa bila aku selalu kasar ke kamu mohon untkm di maapkan sayangg  iloveyoumore sayangg cintaaa cantikkk gemseee bidadrikuuuu💖💗💗💗💗💗💗💗`;
+      runningText.style.width = "0";
+      runningText.innerHTML = pesan;
+      void runningText.offsetWidth;
+      runningText.style.animation = "typing 12s steps(150, end) forwards";
+      kue.style.display = "block";
+    }
+
+    function updateCountdown() {
+      const targetDate = new Date("July 18, 2025 00:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "Hari ini ulang tahun bubub!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `Menuju ultah bubub: ${days}h ${hours}j ${minutes}m ${seconds}d`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
 </body>
 </html>
