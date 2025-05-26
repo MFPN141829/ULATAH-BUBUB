@@ -1,45 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Selamat Ulang Tahun!</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      text-align: center;
       font-family: Arial, sans-serif;
-      background-image: url('assets/bg.JPG');
+      text-align: center;
+      background-image: url('assets/bg.jpg');
       background-size: cover;
       background-position: center;
       color: white;
-      margin: 0;
-      padding: 0;
     }
+
     h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
+      font-size: 6vw;
+      margin-top: 30px;
       animation: blink 1.5s infinite;
     }
+
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
+
     #running-text {
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid pink;
       width: 0;
-      animation: typing 10s steps(50, end) forwards;
-      font-size: 1.2em;
+      animation: typing 7s steps(50, end) forwards;
+      font-size: 4vw;
       margin: 20px auto;
       max-width: 90%;
     }
+
     @keyframes typing {
       from { width: 0 }
       to { width: 100% }
     }
+
     button {
       padding: 10px 20px;
-      margin: 20px;
+      margin: 20px 10px;
       font-size: 1em;
       background-color: #e91e63;
       color: white;
@@ -47,42 +53,55 @@
       border-radius: 8px;
       cursor: pointer;
     }
-    #ucapan {
+
+    img {
+      max-width: 90%;
+      height: auto;
+    }
+
+    #ucapan, #galeri {
       display: none;
       padding: 20px;
     }
+
     #gif-container {
       display: none;
       margin-top: 20px;
     }
+
     .fade-in {
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
+
     .fade-in.show {
       opacity: 1;
     }
-    #galeri {
-      display: none;
-      text-align: center;
-      padding: 20px;
+
+    .foto-scroll {
+      min-width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      scroll-snap-align: start;
     }
-    .foto {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-      display: inline-block;
+
+    #foto-wrapper {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
-    .foto.muncul {
-      opacity: 1;
-      transform: translateY(0);
+
+    @media (min-width: 600px) {
+      h1 { font-size: 3em; }
+      #running-text { font-size: 1.5em; }
     }
   </style>
 </head>
 <body>
 
   <h1>Selamat Ulang Tahun!</h1>
-  <img src="assets/foto.jpg" alt="Foto" width="300"><br>
+  <img src="assets/foto.jpg" alt="Foto"><br>
   <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
 
   <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
@@ -93,39 +112,29 @@
   </audio>
 
   <div id="ucapan">
-    <h2>Ucapan Spesial</h2>
-    <p style="max-width: 90%; margin: auto;">
-      HAPPY BRITHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU  
-      Selamat atas bertambah umurnya ssyanggg  
-      semoga semakin bertambah umurnya menjadi probadi yang lebih baik lagi yaa ssyang  
-      dan juga menjadi anak yang sholehah kepada orangtuanya, semoga selalu di berikan kesehatan  
-      dan rezekinya di perlancar lagi ssyanggg amiin, dan semoga apa yang kamu harapkan selalu  
-      tercapai yaa ssyangg  
-      maap yaa sayangg kalo kado dari aku kurang bagus atau kurang dari ekspetasi kamu,  
-      maap juga bila perayaan nya kurang se bagus kamu di saat kamu meraykan ulang tahun aku  
-      pokonya dari aku do'a yang terbaik untuk bubub yaa sayanggg  
-      aku sayang bnaget sama kamu walaupun ya kadang suka beratem juga tapi suka nyesal  
-      sih kalo udah berantem nya maap yaa bila aku selalu kasar ke kamu  
-      mohon untuk di maapkan sayangg  
-      iloveyoumore sayangg cintaaa cantikkk gemseee bidadrikuuuu
+    <h2 style="font-size: 5vw;">Ucapan Spesial</h2>
+    <p style="max-width: 90%; margin: auto; font-size: 4vw;">
+      HAPPY BIRTHDAY KE-20 SSYANGKUUU CINTAKUY CANTIKUUU GEMESSSKUUU BIDADRIKU CALON ISTRIKUUU💗💗💖💖💝💝💝<br><br>
+      Selamat atas bertambah umurnya ssyanggg💖💖 semoga menjadi pribadi lebih baik, anak sholehah, sehat selalu, rezekinya lancar, dan semua harapanmu tercapai yaa ssyangg💗💖💖💖<br><br>
+      Maaf yaa kalo kado atau perayaannya kurang dari ekspektasimu. Tapi dari aku doa yang terbaik buat kamu, sayangku tersayang! Aku sayang banget sama kamu, walau suka berantem tapi aku nyesel setiap habis itu. Maaf yaa bila kasar. ILOVEYOUMORE CINTAAA CANTIKK GEMSEEE BIDADRIKUUU💖💗💗💗💗💗💗💗
     </p>
 
     <div id="gif-container" class="fade-in">
-      <img src="assets/hati.gif" alt="Hati" width="120" style="margin: 10px;">
-      <img src="assets/peluk.gif" alt="Peluk" width="120" style="margin: 10px;">
+      <img src="assets/hati.gif" alt="Hati" width="100">
+      <img src="assets/peluk.gif" alt="Peluk" width="100">
     </div>
 
     <button onclick="showGaleri()">Lanjut ke Galeri</button>
   </div>
 
   <div id="galeri">
-    <h2>Kenangan Kita</h2>
-    <div style="overflow-x: auto; white-space: nowrap; padding: 10px;">
-      <img src="assets/foto1.jpg" alt="Foto 1" class="foto" style="width: 200px; margin-right: 10px;">
-      <img src="assets/foto2.jpg" alt="Foto 2" class="foto" style="width: 200px; margin-right: 10px;">
-      <img src="assets/foto3.jpg" alt="Foto 3" class="foto" style="width: 200px; margin-right: 10px;">
-      <img src="assets/foto4.jpg" alt="Foto 4" class="foto" style="width: 200px; margin-right: 10px;">
-      <img src="assets/foto5.jpg" alt="Foto 5" class="foto" style="width: 200px;">
+    <h2 style="font-size: 5vw;">Kenangan Kita</h2>
+    <div id="foto-wrapper">
+      <img src="assets/foto1.jpg" alt="Foto 1" class="foto-scroll">
+      <img src="assets/foto2.jpg" alt="Foto 2" class="foto-scroll">
+      <img src="assets/foto3.jpg" alt="Foto 3" class="foto-scroll">
+      <img src="assets/foto4.jpg" alt="Foto 4" class="foto-scroll">
+      <img src="assets/foto5.jpg" alt="Foto 5" class="foto-scroll">
     </div>
   </div>
 
@@ -151,10 +160,8 @@
     function showGaleri() {
       document.getElementById('ucapan').style.display = 'none';
       document.getElementById('galeri').style.display = 'block';
-      animasiFoto();
     }
 
-    // Munculkan gif setelah scroll habis
     window.addEventListener('scroll', function () {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
         const gif = document.getElementById('gif-container');
@@ -164,25 +171,6 @@
         }, 100);
       }
     });
-
-    // Galeri animasi
-    function isInViewport(el) {
-      const rect = el.getBoundingClientRect();
-      return rect.left < window.innerWidth && rect.right > 0;
-    }
-
-    function animasiFoto() {
-      const fotoList = document.querySelectorAll('.foto');
-      fotoList.forEach(foto => {
-        if (isInViewport(foto)) {
-          foto.classList.add('muncul');
-        }
-      });
-    }
-
-    const galeriScroll = document.querySelector('#galeri div[style*="overflow-x"]');
-    galeriScroll.addEventListener('scroll', animasiFoto);
   </script>
-
 </body>
 </html>
