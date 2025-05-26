@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,41 +5,68 @@
   <title>Selamat Ulang Tahun!</title>
   <style>
     body {
-  background: url('assets/bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  text-shadow: 1px 1px 4px #000;
       text-align: center;
-      font-family: 'Comic Sans MS', cursive;
-      color: #880e4f;
-      margin: 0;
+      background: url('assets/bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-shadow: 1px 1px 4px #000;
     }
     h1 {
-      animation: slidein 10s infinite alternate;
       font-size: 2.5em;
-    }
-    @keyframes slidein {
-      from { transform: translateX(-100%); }
-      to   { transform: translateX(100%); }
-    }
-    img {
       margin-top: 20px;
-      width: 300px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px #333;
+      animation: blink 1.5s infinite;
     }
-    audio {
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    #running-text {
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid pink;
+      width: 0;
+      animation: typing 10s steps(50, end) forwards;
+      font-size: 1.2em;
+      margin-top: 30px;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    button {
+      padding: 10px 20px;
       margin-top: 20px;
+      font-size: 1em;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <h1>Selamat Ulang Tahun!</h1>
-  <img src="assets/foto.jpg" alt="Foto Ucapan">
-  <br>
-  <audio controls autoplay loop>
+  <img src="assets/foto.jpg" alt="Foto" width="300"><br>
+
+  <p id="running-text">Semoga panjang umur, sehat selalu, dan semua harapanmu tercapai.</p>
+
+  <button onclick="toggleAudio()">Putar / Hentikan Musik</button>
+
+  <audio id="bgm" autoplay loop>
     <source src="assets/lagu.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio.
   </audio>
+
+  <script>
+    const audio = document.getElementById('bgm');
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
 </body>
 </html>
